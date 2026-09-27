@@ -1,5 +1,15 @@
 # test_project.py -- DeafVoice AI Unit Test Suite
 import os
+import sys
+
+# Auto-redirect to project venv python if not already running in it
+project_root = os.path.dirname(os.path.abspath(__file__))
+venv_py = os.path.join(project_root, 'venv', 'Scripts', 'python.exe')
+if os.path.exists(venv_py) and os.path.normcase(sys.executable) != os.path.normcase(venv_py):
+    import subprocess
+    res = subprocess.run([venv_py] + sys.argv, cwd=project_root)
+    sys.exit(res.returncode)
+
 import unittest
 import numpy as np
 import tensorflow as tf

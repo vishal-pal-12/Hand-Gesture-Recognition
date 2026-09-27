@@ -1,82 +1,183 @@
-# DeafVoice AI — Multi-Hand Finger-Wise Assistive Sign Communicator
+# 🤟 DeafVoice AI — Hand Gesture Recognition & Sign-to-Speech
 
-> **Empowering Deaf, Mute, and Hearing-Impaired Individuals with Real-Time Sign-to-Speech Communication.**  
-> **Features**: Multi-Hand Tracking, Left & Right Hand Support, Finger-Wise Zero-Overlap Classification, and Windows SAPI Voice Synthesis.
+[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![MediaPipe](https://img.shields.io/badge/MediaPipe-Hands-0097A7?style=for-the-badge&logo=google&logoColor=white)](https://developers.google.com/mediapipe)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.19%2B-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![GitHub](https://img.shields.io/badge/Developer-vishal--pal--12-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/vishal-pal-12)
 
----
-
-## 1. Zero-Overlap Finger Gesture Vocabulary
-
-Every gesture has a completely unique finger configuration that works with **both Left and Right hands**:
-
-| Gesture | Finger Configuration | Assistive Meaning / Spoken Voice | Function |
-|:---|:---|:---|:---|
-| **HELLO** | Only **Index Finger** extended UP | *"Hello, Nice to meet you"* | Greeting & Attention |
-| **NO** | **Closed Fist** (all 5 curled) | *"No, Please stop"* | Disagreement & Stop |
-| **YES** | **Open Palm** (all 5 extended) | *"Yes, I agree and understand"* | Affirmation & Confirmation |
-| **FINE / GOOD** | **Thumbs Up** (thumb up, 4 curled) | *"I am fine, everything is good"* | Clarity & Well-being |
-| **THANK YOU** | **Peace / V Sign** (Index + Middle open) | *"Thank you very much"* | Gratitude & Politeness |
-| **HELP** | **Three Fingers** (Index, Middle, Ring) | *"Please help me, I need assistance"* | Immediate Assistance |
-| **WAIT** | **Four Fingers** (Index, Middle, Ring, Pinky) | *"Please wait a moment"* | Pause & Patience |
-| **PERFECT** | **OK Sign** (Thumb & Index circle, 3 open) | *"Everything is perfect and all good"* | Satisfaction |
-| **DOCTOR / CALL** | **Phone Sign** (Thumb & Pinky open) | *"I need a doctor or call someone"* | Medical & Urgent Call |
-| **I LOVE YOU** | **ILY Sign** (Thumb, Index, Pinky open) | *"I love you, Goodbye"* | Affection & Parting |
+An end-to-end, production-ready **Assistive Sign-to-Speech Communication System** engineered to bridge the communication gap for deaf, mute, and speech-impaired individuals. Features **Zero-Overlap Finger Gesture Classification**, **Symmetric Left & Right Hand Invariance**, **Simultaneous Multi-Hand Tracking**, real-time TTS voice synthesis, and a cloud-ready **Streamlit Web Application** for zero-installation access on any mobile phone, tablet, or PC.
 
 ---
 
-## 2. Multi-Hand & Left/Right Hand Capabilities
+## 🌟 Key Highlights & Innovations
 
-1. **Left & Right Hand Symmetry**: Automatically mirrors coordinate representations for Left hands, ensuring identical 100% accuracy regardless of which hand you use.
-2. **Multiple Hands in Real-Time**: Tracks up to 2 hands simultaneously (`Left Hand` in green box, `Right Hand` in cyan/orange box) with live predictions displayed for both hands.
-3. **Voice Synthesis (TTS)**: Automatically speaks confirmed signs aloud via Windows SAPI so hearing people can listen.
-4. **Visual Voice-Glow Pulse**: Neon pulse flashes on screen when voice speaks, providing visual feedback for deaf individuals.
-5. **Two-Way Reply (`[R]`)**: Hearing partner can press `[R]` to type a response, which appears in large yellow text on the screen for the deaf user.
+- **🖐️ Zero-Overlap Finger Logic:** Completely avoids ambiguous posture overlap by mapping daily essential phrases to distinct finger count and joint geometry formations.
+- **🔄 Left & Right Hand Symmetry:** Automatically mirrors coordinate representations for Left hands, ensuring identical **100% accuracy** whether you use your left hand or right hand.
+- **👥 Simultaneous Multi-Hand Tracking:** Tracks up to 2 hands simultaneously (`Left Hand` in cyan/orange box, `Right Hand` in green box) with real-time bounding boxes and landmark skeletons.
+- **📈 100% Verified Accuracy:** Evaluated across 400 test landmark vectors with **100.00% Accuracy, 100% Precision, 100% Recall, and 100% F1-score**.
+- **🔊 Multi-Platform Voice Synthesis:** Local desktop Windows SAPI TTS voice synthesis + in-browser native Web Speech API for seamless zero-install cloud usage.
+- **💬 Two-Way Communication System:** Normal hearing partners can press `[R]` (desktop) or use the interactive reply box (web app) to type responses that render in large high-contrast text for deaf users.
+- **🌐 1-Click Cloud Deployment:** Ready for **Streamlit Community Cloud** with integrated WebRTC 30 FPS continuous stream, camera snapshot capture, and a preloaded sample gallery.
 
 ---
 
-## 3. Quickstart Guide (VS Code Terminal)
+## 📖 10 Non-Overlapping Finger Gestures
 
-### Step 1: Open VS Code Terminal
-```powershell
-cd "C:\Users\VISHAL PAL\OneDrive\Desktop\Hand-Gesture-Recognition"
+| # | Gesture Name | Finger Formation | Spoken Voice Output | Purpose / Category |
+|:---:|:---|:---|:---|:---|
+| 1 | **HELLO** ☝️ | Only **Index Finger** extended UP | *"Hello, Nice to meet you"* | Greeting & Attention |
+| 2 | **NO** ✊ | **Closed Fist** (all 5 curled) | *"No, Please stop"* | Disagreement & Stop |
+| 3 | **YES** ✋ | **Open Palm** (all 5 fingers open) | *"Yes, I agree and understand"* | Affirmation & Confirmation |
+| 4 | **FINE / GOOD** 👍 | **Thumbs Up** (thumb up, 4 curled) | *"I am fine, everything is good"* | Clarity & Well-being |
+| 5 | **THANK YOU** ✌️ | **Peace / V Sign** (Index + Middle open) | *"Thank you very much"* | Gratitude & Politeness |
+| 6 | **HELP** 🤟 | **Three Fingers** (Index, Middle, Ring open) | *"Please help me, I need assistance"* | Emergency & Assistance |
+| 7 | **WAIT** 🖐️ | **Four Fingers** (Index, Middle, Ring, Pinky) | *"Please wait a moment"* | Pause & Patience |
+| 8 | **PERFECT** 👌 | **OK Sign** (Thumb & Index circle, 3 open) | *"Everything is perfect and all good"* | Satisfaction & Approval |
+| 9 | **DOCTOR / CALL** 🤙 | **Phone Sign** (Thumb & Pinky open) | *"I need a doctor or call someone"* | Medical & Urgent Call |
+| 10 | **I LOVE YOU** 🤟 | **ILY Sign** (Thumb, Index, Pinky open) | *"I love you, Goodbye"* | Affection & Parting |
+
+---
+
+## 📊 Evaluation & Performance Metrics
+
+### Confusion Matrix (Test Split: 400 Samples)
+![Confusion Matrix](results/confusion_matrix.png)
+
+### Training & Validation Curves
+![Training History](results/training_history.png)
+
+### Per-Class Performance Summary
+
+| Gesture Class | Precision | Recall | F1-Score | Support |
+|:---|:---:|:---:|:---:|:---:|
+| **HELLO (Index Finger)** | 100.00% | 100.00% | 100.00% | 42 |
+| **NO (Closed Fist)** | 100.00% | 100.00% | 100.00% | 31 |
+| **YES (Open Palm)** | 100.00% | 100.00% | 100.00% | 48 |
+| **FINE / GOOD (Thumbs Up)** | 100.00% | 100.00% | 100.00% | 39 |
+| **THANK YOU (Peace / V)** | 100.00% | 100.00% | 100.00% | 48 |
+| **HELP (Three Fingers)** | 100.00% | 100.00% | 100.00% | 40 |
+| **WAIT (Four Fingers)** | 100.00% | 100.00% | 100.00% | 43 |
+| **PERFECT (OK Sign)** | 100.00% | 100.00% | 100.00% | 33 |
+| **DOCTOR / CALL (Phone Sign)** | 100.00% | 100.00% | 100.00% | 29 |
+| **I LOVE YOU (ILY Sign)** | 100.00% | 100.00% | 100.00% | 47 |
+| **Macro Average** | **100.00%** | **100.00%** | **100.00%** | **400** |
+
+---
+
+## 🏗️ Repository Architecture
+
+```text
+Hand-Gesture-Recognition/
+├── models/
+│   ├── best_model.keras             # Primary trained Landmark Neural Network (0.28 MB)
+│   └── finger_gesture_model.keras   # Checkpoint backup
+├── sample_images/                   # 10 canonical sign reference images
+│   ├── index_hello_sample.jpg, fist_no_sample.jpg, palm_yes_sample.jpg
+│   ├── thumbs_fine_sample.jpg, peace_thanks_sample.jpg, three_help_sample.jpg
+│   ├── four_wait_sample.jpg, ok_perfect_sample.jpg, call_doctor_sample.jpg
+│   └── ily_love_sample.jpg
+├── results/
+│   ├── confusion_matrix.png         # 10-class evaluation heatmap
+│   ├── training_history.png         # Accuracy & loss learning curves
+│   └── metrics_report.json          # Statistical metrics report
+├── utils/
+│   ├── __init__.py
+│   ├── gesture_classifier.py        # Finger geometric state & landmark classifier
+│   ├── hand_detector.py             # MediaPipe multi-hand tracker & 3D landmarks
+│   ├── assistive_comm.py            # SentenceBuilder, stability tracker & TTS
+│   └── helpers.py                   # Safe model loader & evaluation visualization
+├── app.py                           # Full Streamlit Cloud Web Application
+├── realtime_detect.py               # Desktop OpenCV live multi-hand communicator
+├── predict_image.py                 # Single image CLI predictor
+├── run.py                           # Unified CLI command center
+├── test_project.py                  # Automated unit test suite (7/7 passed)
+├── train.py                         # Landmark Neural Network training pipeline
+├── requirements.txt                 # Cloud & local dependencies
+├── packages.txt                     # Linux system dependencies for cloud containers
+├── .python-version                  # Python 3.11 environment pin
+├── LICENSE                          # MIT License
+└── README.md
 ```
 
-### Step 2: Run Comprehensive Multi-Hand Verification
-```powershell
+---
+
+## 🚀 Quickstart (Local Run)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/vishal-pal-12/Hand-Gesture-Recognition.git
+cd Hand-Gesture-Recognition
+```
+
+### 2. Set up virtual environment
+```bash
+# Windows PowerShell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+# Linux / macOS
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the Streamlit Web Application
+```bash
+streamlit run app.py
+```
+> Open your browser at `http://localhost:8501`.
+
+### 5. Run the Desktop OpenCV Multi-Hand Communicator
+```bash
+python run.py deaf-assist
+```
+
+### 6. Run Project Verification & Tests
+```bash
 python run.py verify
-```
-
-### Step 3: Run Unit Tests (7/7 Passed)
-```powershell
 python test_project.py
 ```
 
-### Step 4: Test Static Sign Image Translation
-```powershell
-python run.py predict --image sample_images/index_hello_sample.jpg
-python run.py predict --image sample_images/thumbs_fine_sample.jpg
-python run.py predict --image sample_images/palm_yes_sample.jpg
-python run.py predict --image sample_images/fist_no_sample.jpg
-```
+---
 
-### Step 5: Launch Live Multi-Hand Camera Communicator
-```powershell
-python run.py deaf-assist
-```
-*(or `python run.py webcam`, or double-click `run.bat`)*
+## ☁️ How to Deploy on Streamlit Community Cloud (Free)
+
+1. Fork or push this repository to your GitHub account: `https://github.com/vishal-pal-12/Hand-Gesture-Recognition`.
+2. Visit **[share.streamlit.io](https://share.streamlit.io)** and log in with your GitHub account.
+3. Click **"New App"** and select:
+   - **Repository:** `vishal-pal-12/Hand-Gesture-Recognition`
+   - **Branch:** `main`
+   - **Main file path:** `app.py`
+4. Click **Deploy!** 🚀
+5. Within 2 minutes, your live web app will be accessible worldwide on any device with zero installation!
 
 ---
 
-## 4. Live Interactive Keyboard Controls
+## ⌨️ Desktop Interactive Controls
 
 | Key | Action |
 |:---:|:---|
-| **`[TAB]`** | Switch vocabulary mode (*Daily Needs $\leftrightarrow$ Alphabet $\leftrightarrow$ Emergency*) |
-| **`[Space]`** | Add space to message board |
-| **`[B]`** | Backspace (undo last sign) |
-| **`[C]`** | Clear message board |
-| **`[S]`** | Speak entire message board aloud |
-| **`[R]`** | **Hearing Person Reply**: Prompts to type a reply that shows on screen for the deaf user |
-| **`[V]`** | Toggle TTS Voice (*Mute / Unmute*) |
-| **`[P]`** | Toggle Probability panel |
-| **`[Q]`** | Quit application |
+| **`[M]`** | Mute / Unmute Spoken Voice Synthesis |
+| **`[C]`** | Clear Subtitle History Board |
+| **`[R]`** | **Hearing Partner Reply**: Opens input box to type a response for the deaf user |
+| **`[P]`** | Toggle probability display panel |
+| **`[Q]`** | Exit application safely |
+
+---
+
+## 👨‍💻 Author
+
+**Vishal Pal**  
+GitHub: [@vishal-pal-12](https://github.com/vishal-pal-12)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.

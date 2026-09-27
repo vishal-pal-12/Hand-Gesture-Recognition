@@ -16,6 +16,23 @@ from PIL import Image
 import streamlit as st
 import streamlit.components.v1 as components
 
+# WebRTC Streaming Setup (for continuous real-time live webcam)
+try:
+    from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration
+    import av
+    WEBRTC_AVAILABLE = True
+    RTC_CONFIGURATION = RTCConfiguration(
+        {
+            "iceServers": [
+                {"urls": ["stun:stun.l.google.com:19302"]},
+                {"urls": ["stun:global.stun.twilio.com:3478"]}
+            ]
+        }
+    )
+except Exception:
+    WEBRTC_AVAILABLE = False
+    RTC_CONFIGURATION = None
+
 # Import custom gesture engine
 from utils.gesture_classifier import (
     CLASS_NAMES,
@@ -245,54 +262,159 @@ def process_image(img_bgr):
 
 
 # -------------------------------------------------------------
+# WEBRTC VIDEO PROCESSOR (CONTINUOUS REAL-TIME DETECTION)
+# -------------------------------------------------------------
+if WEBRTC_AVAILABLE:
+    class GestureVideoProcessor(VideoProcessorBase):
+        def __init__(self):
+            self.detector = HandDetector(static_mode=False, max_hands=2, min_detection_conf=0.6, min_tracking_conf=0.6)
+            self.model = load_deafvoice_model()
+
+        def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
+            img = frame.to_ndarray(format="bgr24")
+            # Flip horizontally for natural mirror selfie view
+            img = cv2.flip(img, 1)
+            h, w = img.shape[:2]
+
+            img, hand_data = self.detector.find_hands(img, draw=True)
+
+            if hand_data:
+                for hand in hand_data:
+                    handedness = hand.get('handedness', 'Right')
+                    lm_21x3 = hand.get('landmarks_norm', hand.get('landmarks'))
+                    bx, by, bw, bh = hand['bbox']
+
+                    pred_idx, pred_name, phrase, conf, probs = classify_finger_gesture(
+                        lm_21x3,
+                        model=self.model,
+                        handedness=handedness
+                    )
+
+                    color = GESTURE_COLORS[pred_idx]
+
+                    # Bounding Box
+                    cv2.rectangle(img, (bx, by), (bx + bw, by + bh), color, 3)
+
+                    # Top Label Banner
+                    tag_text = f"[{handedness.upper()}] {GESTURE_LABELS[pred_idx]} ({conf*100:.0f}%)"
+                    (tw, th), _ = cv2.getTextSize(tag_text, cv2.FONT_HERSHEY_SIMPLEX, 0.65, 2)
+                    top_y = max(th + 14, by)
+                    cv2.rectangle(img, (bx, top_y - th - 12), (bx + tw + 12, top_y + 4), color, -1)
+                    txt_color = (15, 15, 20) if sum(color) > 380 else (255, 255, 255)
+                    cv2.putText(img, tag_text, (bx + 6, top_y - 4),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.65, txt_color, 2, cv2.LINE_AA)
+
+                    # Bottom Spoken Phrase Banner
+                    phrase_text = f"\"{phrase}\""
+                    (pw, ph), _ = cv2.getTextSize(phrase_text, cv2.FONT_HERSHEY_SIMPLEX, 0.55, 2)
+                    bot_y = min(h - 10, by + bh + ph + 12)
+                    cv2.rectangle(img, (bx, by + bh), (bx + pw + 12, bot_y), (20, 20, 25), -1)
+                    cv2.putText(img, phrase_text, (bx + 6, bot_y - 6),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.55, (80, 255, 120), 2, cv2.LINE_AA)
+
+            # Top HUD Title Banner
+            cv2.rectangle(img, (0, 0), (w, 36), (15, 15, 20), -1)
+            cv2.putText(img, "DEAFVOICE AI: LIVE SIGN-TO-SPEECH (Dual-Hand Tracking)", (12, 25),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 240, 255), 2, cv2.LINE_AA)
+
+            return av.VideoFrame.from_ndarray(img, format="bgr24")
+
+
+# -------------------------------------------------------------
 # TAB 1: LIVE CAMERA
 # -------------------------------------------------------------
 with tab_live:
-    st.subheader("Live Web Camera Detection")
-    st.markdown("Capture a snapshot from your device camera or test live hand postures.")
+    cam_mode = st.radio(
+        "Camera Mode:",
+        ["🎥 Continuous Live Stream (Real-Time Video)", "📸 Snapshot Capture"],
+        horizontal=True
+    )
 
-    camera_photo = st.camera_input("Take a snapshot of your hand gesture")
+    if cam_mode == "🎥 Continuous Live Stream (Real-Time Video)":
+        st.markdown("#### 🎥 Live Camera Stream (Real-Time Continuous Tracking)")
+        st.info("Click **'START'** below to activate the continuous real-time webcam. Hand landmarks, bounding boxes, and spoken signs will track your hands continuously frame-by-frame, exactly like the desktop app!")
 
-    if camera_photo is not None:
-        pil_img = Image.open(camera_photo)
-        img_np = np.array(pil_img)
-        img_bgr = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
+        if WEBRTC_AVAILABLE:
+            col_live, col_guide = st.columns([1.6, 1], gap="medium")
+            with col_live:
+                webrtc_streamer(
+                    key="deafvoice-live-stream",
+                    video_processor_factory=GestureVideoProcessor,
+                    rtc_configuration=RTC_CONFIGURATION,
+                    media_stream_constraints={"video": True, "audio": False},
+                    async_processing=True,
+                )
+            with col_guide:
+                st.markdown("#### 💡 How Live Mode Works")
+                st.markdown("""
+                - Click **START** to turn on your webcam.
+                - Show any of the 10 gestures with your **Left Hand**, **Right Hand**, or **Both Hands**.
+                - Hand landmarks and bounding boxes track your hands in **real-time continuous video**.
+                - Confirmed signs and spoken phrases appear continuously on the live video overlay!
+                - Click **STOP** when you want to pause or turn off the camera.
+                """)
+                st.markdown("#### 🎯 Quick Gesture Reminders:")
+                st.markdown("""
+                - ☝️ **Index Only:** `HELLO`
+                - 🖐️ **Four Fingers:** `WAIT`
+                - ✋ **Open Palm:** `YES`
+                - ✊ **Closed Fist:** `NO`
+                - 👍 **Thumbs Up:** `FINE / GOOD`
+                - ✌️ **Peace / V:** `THANK YOU`
+                - 🤟 **Three Fingers:** `HELP`
+                - 👌 **OK Sign:** `PERFECT`
+                - 🤙 **Phone Sign:** `DOCTOR / CALL`
+                - 🤟 **ILY Sign:** `I LOVE YOU`
+                """)
+        else:
+            st.warning("`streamlit-webrtc` is not available in the current environment.")
 
-        with st.spinner("Analyzing hand landmarks & gesture ..."):
-            annotated_bgr, results = process_image(img_bgr)
-            annotated_rgb = cv2.cvtColor(annotated_bgr, cv2.COLOR_BGR2RGB)
+    else:
+        st.subheader("Snapshot Photo Capture")
+        st.markdown("Take a snapshot from your device camera to predict gestures and view full probability charts.")
 
-        col1, col2 = st.columns([1.2, 1])
+        camera_photo = st.camera_input("Take a snapshot of your hand gesture")
 
-        with col1:
-            st.image(annotated_rgb, caption="Recognized Hand Gestures", use_container_width=True)
+        if camera_photo is not None:
+            pil_img = Image.open(camera_photo)
+            img_np = np.array(pil_img)
+            img_bgr = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
 
-        with col2:
-            if results:
-                for idx, r in enumerate(results):
-                    st.markdown(f"### Hand {idx+1}: {r['handedness']} Hand")
-                    st.markdown(f"""
-                    <div class="spoken-card">
-                        <div class="spoken-title">🔊 Spoken Voice Translation:</div>
-                        <div class="spoken-text">"{r['phrase']}"</div>
-                        <div style="color: #94a3b8; font-size: 0.88rem; margin-top: 0.4rem;">
-                            Recognized Sign: <b>{r['label']}</b> (Confidence: <b>{r['confidence']*100:.1f}%</b>)
+            with st.spinner("Analyzing hand landmarks & gesture ..."):
+                annotated_bgr, results = process_image(img_bgr)
+                annotated_rgb = cv2.cvtColor(annotated_bgr, cv2.COLOR_BGR2RGB)
+
+            col1, col2 = st.columns([1.2, 1])
+
+            with col1:
+                st.image(annotated_rgb, caption="Recognized Hand Gestures", use_container_width=True)
+
+            with col2:
+                if results:
+                    for idx, r in enumerate(results):
+                        st.markdown(f"### Hand {idx+1}: {r['handedness']} Hand")
+                        st.markdown(f"""
+                        <div class="spoken-card">
+                            <div class="spoken-title">🔊 Spoken Voice Translation:</div>
+                            <div class="spoken-text">"{r['phrase']}"</div>
+                            <div style="color: #94a3b8; font-size: 0.88rem; margin-top: 0.4rem;">
+                                Recognized Sign: <b>{r['label']}</b> (Confidence: <b>{r['confidence']*100:.1f}%</b>)
+                            </div>
                         </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                        """, unsafe_allow_html=True)
 
-                    if enable_tts:
-                        play_browser_tts(r['phrase'])
+                        if enable_tts:
+                            play_browser_tts(r['phrase'])
 
-                    st.markdown("#### Probability Distribution:")
-                    probs = r['probabilities']
-                    chart_data = {
-                        "Gesture": [GESTURE_LABELS[i].split('(')[0].strip() for i in range(10)],
-                        "Probability (%)": [float(probs[i] * 100) for i in range(10)]
-                    }
-                    st.bar_chart(chart_data, x="Gesture", y="Probability (%)", color="#38bdf8")
-            else:
-                st.warning("⚠️ No hand detected in frame. Please hold your hand clearly inside the camera frame.")
+                        st.markdown("#### Probability Distribution:")
+                        probs = r['probabilities']
+                        chart_data = {
+                            "Gesture": [GESTURE_LABELS[i].split('(')[0].strip() for i in range(10)],
+                            "Probability (%)": [float(probs[i] * 100) for i in range(10)]
+                        }
+                        st.bar_chart(chart_data, x="Gesture", y="Probability (%)", color="#38bdf8")
+                else:
+                    st.warning("⚠️ No hand detected in frame. Please hold your hand clearly inside the camera frame.")
 
 
 # -------------------------------------------------------------

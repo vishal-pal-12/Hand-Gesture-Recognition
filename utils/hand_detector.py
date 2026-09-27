@@ -5,7 +5,11 @@ import numpy as np
 
 class HandDetector:
     """Detects multiple hands (Left and Right) with 21 3D landmarks using MediaPipe."""
-    def __init__(self, static_mode=False, max_hands=2, min_detection_conf=0.6, min_tracking_conf=0.6):
+    def __init__(self, static_mode=False, max_hands=2, min_detection_conf=0.6, min_tracking_conf=0.6, detection_con=None, track_con=None, **kwargs):
+        if detection_con is not None:
+            min_detection_conf = detection_con
+        if track_con is not None:
+            min_tracking_conf = track_con
         self.static_mode = static_mode
         self.max_hands = max_hands
         self.min_detection_conf = min_detection_conf
@@ -79,6 +83,7 @@ class HandDetector:
                 hand_data.append({
                     'bbox': (x_min, y_min, box_w, box_h),
                     'landmarks': lm_array,
+                    'landmarks_norm': lm_array,
                     'handedness': handedness_label,
                     'score': score
                 })

@@ -126,7 +126,7 @@ def load_deafvoice_model():
 @st.cache_resource
 def get_hand_detector():
     """Initializes and caches the MediaPipe HandDetector."""
-    return HandDetector(max_hands=2, detection_con=0.6, track_con=0.6)
+    return HandDetector(max_hands=2, min_detection_conf=0.6, min_tracking_conf=0.6)
 
 
 def play_browser_tts(phrase):

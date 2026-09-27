@@ -1,0 +1,9 @@
+{
+    "task": "Deaf and Mute Assistive Sign Language Recognition",
+    "accuracy_pct": 85.0,
+    "precision_macro_pct": 86.14,
+    "recall_macro_pct": 85.0,
+    "f1_score_macro_pct": 84.84,
+    "total_test_samples": 400,
+    "num_sign_categories": 10
+}

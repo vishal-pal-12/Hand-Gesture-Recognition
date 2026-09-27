@@ -1,4 +1,4 @@
-# test_project.py -- DeafVoice AI Unit Test Suite
+# test_project.py -- DeafVoice AI Unit Test Suite for Finger-Wise Multi-Hand AI
 import os
 import sys
 
@@ -14,90 +14,84 @@ import unittest
 import numpy as np
 import tensorflow as tf
 
-from models.architecture import build_paper_cnn
-from utils.helpers import (
+from models.architecture import build_landmark_classifier
+from utils.gesture_classifier import (
     CLASS_NAMES,
     GESTURE_LABELS,
     DEAF_SPOKEN_PHRASES,
-    preprocess_image
+    normalize_landmarks,
+    classify_finger_gesture
 )
+from utils.prepare_dataset import generate_canonical_landmarks
 from utils.hand_detector import HandDetector
-from utils.assistive_comm import (
-    SentenceBuilder,
-    GestureStabilityTracker,
-    VOCABULARY_MODES,
-    DEAF_DAILY_PHRASES
-)
+from utils.assistive_comm import SentenceBuilder, GestureStabilityTracker
 
 
-class TestDeafVoiceProject(unittest.TestCase):
+class TestDeafVoiceMultiHandProject(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.project_root = os.path.dirname(os.path.abspath(__file__))
-        cls.train_dir = os.path.join(cls.project_root, 'data', 'processed', 'train')
-        cls.test_dir = os.path.join(cls.project_root, 'data', 'processed', 'test')
-
-    def test_01_dataset_structure(self):
-        self.assertTrue(os.path.exists(self.train_dir), "Train directory missing")
-        self.assertTrue(os.path.exists(self.test_dir), "Test directory missing")
-        for c in CLASS_NAMES:
-            c_train = os.path.join(self.train_dir, c)
-            c_test = os.path.join(self.test_dir, c)
-            self.assertTrue(os.path.exists(c_train), f"Missing class in train: {c}")
-            self.assertTrue(os.path.exists(c_test), f"Missing class in test: {c}")
-            self.assertEqual(len(os.listdir(c_train)), 160, f"Expected 160 train images in {c}")
-            self.assertEqual(len(os.listdir(c_test)), 40, f"Expected 40 test images in {c}")
-
-    def test_02_model_architecture(self):
-        model = build_paper_cnn(input_shape=(100, 100, 3), num_classes=10)
-        self.assertIn(model.count_params(), [166042, 166266], "Parameter count mismatch")
-        dummy = tf.zeros((2, 100, 100, 3))
-        out = model(dummy)
-        self.assertEqual(out.shape, (2, 10))
-
-    def test_03_preprocessing(self):
-        dummy = np.ones((120, 160, 3), dtype=np.uint8) * 200
-        tensor = preprocess_image(dummy, img_size=100)
-        self.assertEqual(tensor.shape, (1, 100, 100, 3))
-        self.assertAlmostEqual(float(tensor.max()), 200.0 / 255.0, places=4)
-
-    def test_04_hand_detector_roi(self):
-        dummy_frame = np.zeros((480, 640, 3), dtype=np.uint8)
-        roi = HandDetector.get_fixed_roi(dummy_frame, size=280)
-        self.assertEqual(len(roi), 4)
-        x, y, w, h = roi
-        self.assertTrue(0 <= x < 640)
-        self.assertTrue(0 <= y < 480)
-
-    def test_05_sample_images_exist(self):
-        sample_dir = os.path.join(self.project_root, 'sample_images')
-        self.assertTrue(os.path.exists(sample_dir))
-        for c in CLASS_NAMES:
-            sample_file = os.path.join(sample_dir, f"{c}_sample.jpg")
-            self.assertTrue(os.path.exists(sample_file), f"Missing sample file: {sample_file}")
-
-    def test_06_deaf_assistive_engine(self):
+    def test_01_classes_and_phrases_count(self):
+        self.assertEqual(len(CLASS_NAMES), 10)
         self.assertEqual(len(GESTURE_LABELS), 10)
         self.assertEqual(len(DEAF_SPOKEN_PHRASES), 10)
+
+    def test_02_multi_hand_detector_configuration(self):
+        detector = HandDetector(max_hands=2)
+        self.assertEqual(detector.max_hands, 2)
+        dummy_frame = np.zeros((480, 640, 3), dtype=np.uint8)
+        _, hand_data = detector.find_hands(dummy_frame, draw=False)
+        self.assertIsInstance(hand_data, list)
+
+    def test_03_landmark_normalization_symmetry(self):
+        # Generate canonical right hand
+        right_lm = generate_canonical_landmarks(gesture_idx=0, handedness="Right")
+        feats_r = normalize_landmarks(right_lm, handedness="Right")
+        self.assertEqual(feats_r.shape, (63,))
+
+        # Generate canonical left hand (mirrored)
+        left_lm = generate_canonical_landmarks(gesture_idx=0, handedness="Left")
+        feats_l = normalize_landmarks(left_lm, handedness="Left")
+        self.assertEqual(feats_l.shape, (63,))
+
+        # They should be symmetric and closely match
+        diff = np.max(np.abs(feats_r - feats_l))
+        self.assertLess(diff, 0.05, f"Left and Right hands must have symmetric feature representations! Diff: {diff}")
+
+    def test_04_zero_overlapping_classification_all_10(self):
+        for idx in range(10):
+            # Test Right Hand
+            lm_r = generate_canonical_landmarks(gesture_idx=idx, handedness="Right")
+            pred_r, _, _, conf_r, _ = classify_finger_gesture(lm_r, handedness="Right")
+            self.assertEqual(pred_r, idx, f"Right hand gesture {idx} ({GESTURE_LABELS[idx]}) misclassified as {pred_r}!")
+            self.assertGreater(conf_r, 0.90)
+
+            # Test Left Hand
+            lm_l = generate_canonical_landmarks(gesture_idx=idx, handedness="Left")
+            pred_l, _, _, conf_l, _ = classify_finger_gesture(lm_l, handedness="Left")
+            self.assertEqual(pred_l, idx, f"Left hand gesture {idx} ({GESTURE_LABELS[idx]}) misclassified as {pred_l}!")
+            self.assertGreater(conf_l, 0.90)
+
+    def test_05_landmark_model_architecture(self):
+        model = build_landmark_classifier(input_dim=63, num_classes=10)
+        dummy_input = tf.zeros((2, 63))
+        out = model(dummy_input)
+        self.assertEqual(out.shape, (2, 10))
+
+    def test_06_assistive_communication_sentence_builder(self):
         sb = SentenceBuilder()
-        token = sb.add_gesture(0)  # HELLO
-        self.assertTrue("Hello" in token)
-        self.assertTrue("Hello" in sb.get_sentence())
-        sb.add_gesture(3)  # THANK YOU
-        self.assertTrue("Thank You" in sb.get_sentence())
+        token1 = sb.add_gesture(0)  # HELLO
+        token2 = sb.add_gesture(3)  # FINE
+        sentence = sb.get_sentence()
+        self.assertTrue("Hello" in sentence)
         sb.backspace()
-        self.assertFalse("Thank You" in sb.get_sentence())
+        self.assertFalse("Fine" in sb.get_sentence())
         sb.clear()
         self.assertEqual(sb.get_sentence(), "")
 
-    def test_07_stability_tracker(self):
-        tracker = GestureStabilityTracker(required_frames=5, cooldown_seconds=0.5)
-        # Test progress increment
-        for _ in range(4):
+    def test_07_stability_tracker_hold_gauge(self):
+        tracker = GestureStabilityTracker(required_frames=6, cooldown_seconds=0.5)
+        for _ in range(5):
             committed, progress = tracker.update(detected_idx=0, confidence=0.85)
             self.assertIsNone(committed)
-        # 5th frame commits
         committed, progress = tracker.update(detected_idx=0, confidence=0.85)
         self.assertEqual(committed, 0)
         self.assertEqual(progress, 1.0)

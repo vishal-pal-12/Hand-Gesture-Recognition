@@ -1,15 +1,18 @@
-# Real-time Hand Detector using MediaPipe and Fixed ROI fallback
+# utils/hand_detector.py -- Real-time Multi-Hand Detector using MediaPipe
 import cv2
 import numpy as np
 
+
 class HandDetector:
-    def __init__(self, static_mode=False, max_hands=1, min_detection_conf=0.5, min_tracking_conf=0.5):
+    """Detects multiple hands (Left and Right) with 21 3D landmarks using MediaPipe."""
+    def __init__(self, static_mode=False, max_hands=2, min_detection_conf=0.6, min_tracking_conf=0.6):
         self.static_mode = static_mode
         self.max_hands = max_hands
         self.min_detection_conf = min_detection_conf
         self.min_tracking_conf = min_tracking_conf
         
         self.has_mediapipe = False
+        self.hands = None
         try:
             import mediapipe as mp
             self.mp_hands = mp.solutions.hands
@@ -27,20 +30,61 @@ class HandDetector:
             self.hands = None
 
     def find_hands(self, frame_bgr, draw=True):
-        boxes = []
-        landmarks_list = []
+        """
+        Detects up to max_hands in frame.
+        Returns:
+            frame_annotated: Frame with landmarks drawn (if draw=True)
+            hand_data: list of dicts for each detected hand:
+                {
+                    'bbox': (x, y, w, h),
+                    'landmarks': np.ndarray of shape (21, 3) normalized (0-1),
+                    'handedness': 'Left' or 'Right',
+                    'score': float confidence
+                }
+        """
+        hand_data = []
         h, w, _ = frame_bgr.shape
 
         if not self.has_mediapipe or self.hands is None:
-            return frame_bgr, boxes, landmarks_list
+            return frame_bgr, hand_data
 
         frame_rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
         results = self.hands.process(frame_rgb)
 
         if results.multi_hand_landmarks:
-            for hand_lms in results.multi_hand_landmarks:
-                landmarks_list.append(hand_lms)
+            for idx, hand_lms in enumerate(results.multi_hand_landmarks):
+                # Handedness label
+                handedness_label = "Right"
+                score = 0.95
+                if results.multi_handedness and idx < len(results.multi_handedness):
+                    h_info = results.multi_handedness[idx].classification[0]
+                    # Note: MediaPipe mirrors camera handedness, so we align with user's perspective
+                    handedness_label = h_info.label
+                    score = float(h_info.score)
+
+                # Landmark array (21, 3)
+                lm_array = np.array([[lm.x, lm.y, lm.z] for lm in hand_lms.landmark], dtype=np.float32)
+
+                # Bounding box with margin
+                x_coords = lm_array[:, 0] * w
+                y_coords = lm_array[:, 1] * h
+                pad = 20
+                x_min = max(0, int(np.min(x_coords)) - pad)
+                y_min = max(0, int(np.min(y_coords)) - pad)
+                x_max = min(w, int(np.max(x_coords)) + pad)
+                y_max = min(h, int(np.max(y_coords)) + pad)
+                box_w = x_max - x_min
+                box_h = y_max - y_min
+
+                hand_data.append({
+                    'bbox': (x_min, y_min, box_w, box_h),
+                    'landmarks': lm_array,
+                    'handedness': handedness_label,
+                    'score': score
+                })
+
                 if draw:
+                    # Draw landmarks on frame
                     self.mp_drawing.draw_landmarks(
                         frame_bgr,
                         hand_lms,
@@ -49,33 +93,13 @@ class HandDetector:
                         self.mp_drawing_styles.get_default_hand_connections_style()
                     )
 
-                x_coords = [lm.x for lm in hand_lms.landmark]
-                y_coords = [lm.y for lm in hand_lms.landmark]
-
-                x_min, x_max = int(min(x_coords) * w), int(max(x_coords) * w)
-                y_min, y_max = int(min(y_coords) * h), int(max(y_coords) * h)
-
-                box_w = x_max - x_min
-                box_h = y_max - y_min
-
-                pad_x = int(box_w * 0.25)
-                pad_y = int(box_h * 0.25)
-
-                x1 = max(0, x_min - pad_x)
-                y1 = max(0, y_min - pad_y)
-                x2 = min(w, x_max + pad_x)
-                y2 = min(h, y_max + pad_y)
-
-                boxes.append((x1, y1, x2 - x1, y2 - y1))
-
-        return frame_bgr, boxes, landmarks_list
+        return frame_bgr, hand_data
 
     @staticmethod
-    def get_fixed_roi(frame_bgr, size=280):
-        h, w, _ = frame_bgr.shape
-        cx, cy = int(w * 0.72), int(h * 0.5)
-        x = max(10, cx - size // 2)
-        y = max(10, cy - size // 2)
-        w_box = min(size, w - x - 10)
-        h_box = min(size, h - y - 10)
-        return (x, y, w_box, h_box)
+    def get_fixed_roi(frame, size=240):
+        """Fallback fixed ROI box for when camera/mediapipe has no detection."""
+        h, w, _ = frame.shape
+        cx, cy = w // 2, h // 2
+        x = max(0, cx - size // 2)
+        y = max(0, cy - size // 2)
+        return x, y, size, size

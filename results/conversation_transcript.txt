@@ -1,0 +1,73 @@
+[2026-09-28 02:40:20] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:40:33] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:40:35] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:40:37] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:40:39] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:40:41] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:41:23] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:41:25] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:41:35] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:41:37] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:41:53] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:41:55] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:41:58] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:42:39] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:42:41] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:42:43] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:42:45] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:42:49] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:42:51] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:43:40] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:43:42] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:44:08] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:45:06] Hearing Partner: kya hua
+[2026-09-28 02:47:00] Hearing Partner: hi
+[2026-09-28 02:47:59] Hearing Partner: hi
+[2026-09-28 02:48:08] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:48:37] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:48:39] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:48:40] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:48:41] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:48:42] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:48:44] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:48:45] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:49:13] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:14] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:16] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:17] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:19] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:42] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:44] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:45] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:47] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:49:54] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:00] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:50:01] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:50:03] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:50:08] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:50:09] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:50:10] Deaf User: YES (Agree / Confirm) -> Yes, I agree and understand
+[2026-09-28 02:50:19] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:21] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:23] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:24] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:29] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:30] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:32] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:33] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:36] Deaf User: NO (Stop / Disagree) -> No, Please stop
+[2026-09-28 02:50:46] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:47] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:49] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:50:50] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:51:07] Deaf User: I LOVE YOU (Goodbye / Affection) -> I love you, Goodbye
+[2026-09-28 02:51:10] Deaf User: I LOVE YOU (Goodbye / Affection) -> I love you, Goodbye
+[2026-09-28 02:51:11] Deaf User: I LOVE YOU (Goodbye / Affection) -> I love you, Goodbye
+[2026-09-28 02:51:24] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:51:31] Deaf User: HELP (Need Assistance) -> Please help me, I need assistance
+[2026-09-28 02:51:39] Deaf User: NO (Stop / Disagree) -> No, Please stop
+[2026-09-28 02:51:43] Deaf User: NO (Stop / Disagree) -> No, Please stop
+[2026-09-28 02:51:51] Deaf User: NO (Stop / Disagree) -> No, Please stop
+[2026-09-28 02:51:53] Deaf User: NO (Stop / Disagree) -> No, Please stop
+[2026-09-28 02:52:15] Deaf User: NO (Stop / Disagree) -> No, Please stop
+[2026-09-28 02:52:17] Deaf User: NO (Stop / Disagree) -> No, Please stop

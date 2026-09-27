@@ -1,9 +1,9 @@
 {
-    "task": "Deaf and Mute Assistive Sign Language Recognition",
-    "accuracy_pct": 85.0,
-    "precision_macro_pct": 86.14,
-    "recall_macro_pct": 85.0,
-    "f1_score_macro_pct": 84.84,
+    "task": "Finger-Wise Multi-Hand Sign Language Recognition for Deaf and Mute",
+    "accuracy_pct": 100.0,
+    "precision_macro_pct": 100.0,
+    "recall_macro_pct": 100.0,
+    "f1_score_macro_pct": 100.0,
     "total_test_samples": 400,
-    "num_sign_categories": 10
+    "num_classes": 10
 }

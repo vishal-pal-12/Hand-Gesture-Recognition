@@ -17,7 +17,7 @@ Every gesture has a completely unique finger configuration that works with **bot
 | **FINE / GOOD** | **Thumbs Up** (thumb up, 4 curled) | *"I am fine, everything is good"* | Clarity & Well-being |
 | **THANK YOU** | **Peace / V Sign** (Index + Middle open) | *"Thank you very much"* | Gratitude & Politeness |
 | **HELP** | **Three Fingers** (Index, Middle, Ring) | *"Please help me, I need assistance"* | Immediate Assistance |
-| **WATER** | **Four Fingers** (Index, Middle, Ring, Pinky) | *"I need water to drink, please"* | Sustenance |
+| **WAIT** | **Four Fingers** (Index, Middle, Ring, Pinky) | *"Please wait a moment"* | Pause & Patience |
 | **PERFECT** | **OK Sign** (Thumb & Index circle, 3 open) | *"Everything is perfect and all good"* | Satisfaction |
 | **DOCTOR / CALL** | **Phone Sign** (Thumb & Pinky open) | *"I need a doctor or call someone"* | Medical & Urgent Call |
 | **I LOVE YOU** | **ILY Sign** (Thumb, Index, Pinky open) | *"I love you, Goodbye"* | Affection & Parting |

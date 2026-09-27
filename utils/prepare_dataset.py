@@ -108,7 +108,7 @@ def generate_canonical_landmarks(gesture_idx, handedness="Right"):
         extend_index()
         extend_middle()
         extend_ring()
-    elif gesture_idx == 6:  # WATER (Four Fingers)
+    elif gesture_idx == 6:  # WAIT (Four Fingers)
         extend_index()
         extend_middle()
         extend_ring()

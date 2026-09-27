@@ -62,7 +62,7 @@ def draw_prediction_card(image_bgr, pred_idx, confidence, probabilities, handedn
     sorted_indices = np.argsort(probabilities)[::-1][:3]
     bar_start_x = int(w * 0.50)
     bar_max_w = int(w * 0.46)
-    short_names = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WATER", "PERFECT", "DOCTOR", "LOVE"]
+    short_names = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WAIT", "PERFECT", "DOCTOR", "LOVE"]
 
     for i, idx in enumerate(sorted_indices):
         bar_y = 10 + i * 21

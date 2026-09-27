@@ -45,7 +45,7 @@ def plot_confusion_matrix(y_true, y_pred, save_path=None, title='Deaf Sign Confu
     """Generates and saves a high-res confusion matrix heatmap."""
     from sklearn.metrics import confusion_matrix
     cm = confusion_matrix(y_true, y_pred)
-    short_labels = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WATER", "PERFECT", "DOCTOR", "LOVE"]
+    short_labels = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WAIT", "PERFECT", "DOCTOR", "LOVE"]
 
     plt.figure(figsize=(9, 7))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',

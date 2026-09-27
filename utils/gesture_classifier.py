@@ -16,7 +16,7 @@ CLASS_NAMES = [
     'thumbs_fine',
     'peace_thanks',
     'three_help',
-    'four_water',
+    'four_wait',
     'ok_perfect',
     'call_doctor',
     'ily_love'
@@ -29,7 +29,7 @@ GESTURE_LABELS = [
     'FINE / GOOD (Thumbs Up)',
     'THANK YOU (Peace / V)',
     'HELP (Three Fingers)',
-    'WATER (Four Fingers)',
+    'WAIT (Four Fingers)',
     'PERFECT (OK Sign)',
     'DOCTOR / CALL (Phone Sign)',
     'I LOVE YOU (ILY Sign)'
@@ -42,7 +42,7 @@ DEAF_SPOKEN_PHRASES = [
     "I am fine, everything is good",
     "Thank you very much",
     "Please help me, I need assistance",
-    "I need water to drink, please",
+    "Please wait a moment",
     "Everything is perfect and all good",
     "I need a doctor or call someone",
     "I love you, Goodbye"
@@ -55,7 +55,7 @@ GESTURE_COLORS = [
     (0, 200, 255),    # Yellow/Gold - Fine/Good
     (255, 140, 0),    # Orange - Thank You
     (200, 50, 220),   # Purple - Help
-    (240, 180, 50),   # Blue - Water
+    (50, 170, 240),   # Amber/Orange - Wait
     (50, 240, 150),   # Mint - Perfect
     (0, 100, 255),    # Coral - Doctor
     (255, 105, 180)   # Pink - I Love You
@@ -197,7 +197,7 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
         pred_idx = 5
         confidence = 0.95
 
-    # 9. Four Fingers -> WATER (Sign 6): 4 fingers open, thumb curled
+    # 9. Four Fingers -> WAIT (Sign 6): 4 fingers open, thumb curled
     elif f['main_count'] == 4 and not f['thumb_out'] and not f['thumb_up']:
         pred_idx = 6
         confidence = 0.96

@@ -14,16 +14,16 @@ from datetime import datetime
 
 # Mode 1: Daily Essential Communication Phrases
 DEAF_DAILY_PHRASES = {
-    0: "Hello, Welcome",
-    1: "No, Stop",
-    2: "Yes, I Agree",
-    3: "Thank You",
-    4: "I Need Help",
-    5: "Water Please",
-    6: "Good, I Understand",
-    7: "All Good, Perfect",
-    8: "Need Doctor or Medicine",
-    9: "I Love You, Goodbye"
+    0: "Hello, Nice to meet you",
+    1: "No, Please stop",
+    2: "Yes, I agree and understand",
+    3: "I am fine, everything is good",
+    4: "Thank you very much",
+    5: "Please help me, I need assistance",
+    6: "Please wait a moment",
+    7: "Everything is perfect and all good",
+    8: "I need a doctor or call someone",
+    9: "I love you, Goodbye"
 }
 
 # Mode 2: Fingerspelling Alphabet (A to J)

@@ -151,3 +151,89 @@
 [2026-09-28 03:18:20] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
 [2026-09-28 03:18:28] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
 [2026-09-28 03:18:29] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:30:30] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:30:31] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:30:46] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:30:47] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:30:49] Deaf User (Left Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:30:51] Deaf User (Left Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:30:52] Deaf User (Left Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:30:54] Deaf User (Left Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:30:55] Deaf User (Left Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:30:56] Deaf User (Left Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:30:59] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:31:00] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:31:01] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:31:03] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:04] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:05] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:07] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:08] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:09] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:10] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:11] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:13] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:15] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:16] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:17] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:19] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:20] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:21] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:22] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:24] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:25] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:29] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:31] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:32] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:33] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:35] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:31:38] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:39] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:41] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:31:54] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:31:56] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:31:57] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:31:58] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:31:59] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:01] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:02] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:03] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:04] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:06] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:07] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:08] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:32:47] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:32:49] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:32:51] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:32:52] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:32:53] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:32:54] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:32:56] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:33:23] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:33:24] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:33:26] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:33:30] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:33:32] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:33:33] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:33:34] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:33:36] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:33:37] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:33:47] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:33:49] Deaf User (Right Hand): FINE / GOOD (Thumbs Up) -> I am fine, everything is good
+[2026-09-28 03:33:57] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:33:59] Deaf User (Right Hand): THANK YOU (Peace / V) -> Thank you very much
+[2026-09-28 03:34:06] Deaf User (Right Hand): HELP (Three Fingers) -> Please help me, I need assistance
+[2026-09-28 03:34:07] Deaf User (Right Hand): HELP (Three Fingers) -> Please help me, I need assistance
+[2026-09-28 03:34:26] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:34:27] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:34:28] Deaf User (Right Hand): YES (Open Palm) -> Yes, I agree and understand
+[2026-09-28 03:34:45] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:34:46] Deaf User (Right Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:34:47] Deaf User (Left Hand): HELLO (Index Finger) -> Hello, Nice to meet you
+[2026-09-28 03:34:59] Deaf User (Right Hand): DOCTOR / CALL (Phone Sign) -> I need a doctor or call someone
+[2026-09-28 03:35:00] Deaf User (Right Hand): DOCTOR / CALL (Phone Sign) -> I need a doctor or call someone
+[2026-09-28 03:35:02] Deaf User (Right Hand): DOCTOR / CALL (Phone Sign) -> I need a doctor or call someone
+[2026-09-28 03:35:08] Deaf User (Right Hand): I LOVE YOU (ILY Sign) -> I love you, Goodbye
+[2026-09-28 03:35:09] Deaf User (Right Hand): I LOVE YOU (ILY Sign) -> I love you, Goodbye
+[2026-09-28 03:35:10] Deaf User (Right Hand): I LOVE YOU (ILY Sign) -> I love you, Goodbye
+[2026-09-28 03:35:12] Deaf User (Right Hand): I LOVE YOU (ILY Sign) -> I love you, Goodbye

@@ -1,5 +1,30 @@
+# Virtual Environments
 venv/
-data/
+.venv/
+env/
+ENV/
+
+# Python cache & compiled files
 __pycache__/
-*.pyc
-*.keras
+*.py[cod]
+*$py.class
+*.so
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*~
+
+# Temporary Logs & OS files
+.DS_Store
+Thumbs.db
+*.log
+scratch/
+
+# Bulky Raw Image Datasets & Archives
+data/raw/
+data/raw_extracted/
+data/processed/
+*.zip
+*.tar.gz

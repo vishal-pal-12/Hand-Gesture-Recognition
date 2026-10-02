@@ -3,5 +3,6 @@
     "python.terminal.activateEnvironment": true,
     "files.autoSave": "off",
     "git.autorefresh": true,
-    "git.enableSmartCommit": true
+    "git.enableSmartCommit": true,
+    "explorer.openEditors.visible": 0
 }

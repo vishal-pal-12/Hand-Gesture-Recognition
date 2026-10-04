@@ -2,7 +2,6 @@
 ======================================================================
   DeafVoice AI — Hand Gesture Recognition Web Application
   app.py
-  Author: Vishal Pal (github.com/vishal-pal-12)
   Powered by Streamlit, MediaPipe, and TensorFlow
 ======================================================================
 """
@@ -208,7 +207,7 @@ with st.sidebar:
             st.markdown(f"**Class Name:** `{CLASS_NAMES[i]}`")
 
     st.write("---")
-    st.caption("👨‍💻 Developed by **Vishal Pal** ([@vishal-pal-12](https://github.com/vishal-pal-12))")
+    st.caption("🤟 DeafVoice AI — Assistive Sign-to-Speech Communication System")
 
 # Main Interface Tabs
 tab_live, tab_upload, tab_gallery, tab_metrics, tab_about = st.tabs([
@@ -594,9 +593,8 @@ with tab_about:
     4. **In-Browser Voice Synthesis:** Uses native browser Web Speech API for immediate vocal translation without requiring local software installation.
     5. **Zero-Installation Cloud Deployment:** Accessible on mobile phones, tablets, laptops, and smart TVs via any modern web browser.
     
-    ### 👨‍💻 Developer & License:
-    - **Author:** Vishal Pal ([@vishal-pal-12](https://github.com/vishal-pal-12))
-    - **License:** MIT License
+    ### 📜 License:
+    - **License:** MIT License (Open Source)
     """)
 
     st.write("---")

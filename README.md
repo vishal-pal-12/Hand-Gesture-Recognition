@@ -5,7 +5,7 @@
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.19%2B-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
-[![GitHub](https://img.shields.io/badge/Developer-vishal--pal--12-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/vishal-pal-12)
+[![Open Source](https://img.shields.io/badge/Open%20Source-DeafVoice%20AI-blue.svg?style=for-the-badge)](#)
 
 An end-to-end, production-ready **Assistive Sign-to-Speech Communication System** engineered to bridge the communication gap for deaf, mute, and speech-impaired individuals. Features **Zero-Overlap Finger Gesture Classification**, **Symmetric Left & Right Hand Invariance**, **Simultaneous Multi-Hand Tracking**, real-time TTS voice synthesis, and a cloud-ready **Streamlit Web Application** for zero-installation access on any mobile phone, tablet, or PC.
 
@@ -105,7 +105,7 @@ Hand-Gesture-Recognition/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/vishal-pal-12/Hand-Gesture-Recognition.git
+git clone https://github.com/<your-username>/Hand-Gesture-Recognition.git
 cd Hand-Gesture-Recognition
 ```
 
@@ -146,10 +146,10 @@ python test_project.py
 
 ## ☁️ How to Deploy on Streamlit Community Cloud (Free)
 
-1. Fork or push this repository to your GitHub account: `https://github.com/vishal-pal-12/Hand-Gesture-Recognition`.
+1. Fork or push this repository to your GitHub account (`<your-username>/Hand-Gesture-Recognition`).
 2. Visit **[share.streamlit.io](https://share.streamlit.io)** and log in with your GitHub account.
 3. Click **"New App"** and select:
-   - **Repository:** `vishal-pal-12/Hand-Gesture-Recognition`
+   - **Repository:** `<your-username>/Hand-Gesture-Recognition`
    - **Branch:** `main`
    - **Main file path:** `app.py`
 4. Click **Deploy!** 🚀
@@ -169,13 +169,6 @@ python test_project.py
 
 ---
 
-## 👨‍💻 Author
-
-**Vishal Pal**  
-GitHub: [@vishal-pal-12](https://github.com/vishal-pal-12)
-
----
-
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is open-source and licensed under the MIT License — see the [LICENSE](LICENSE) file for details.

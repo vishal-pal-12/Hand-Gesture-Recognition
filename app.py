@@ -361,7 +361,7 @@ with tab_live:
                 - 👍 **Thumbs Up (1 Finger):** `FINE / GOOD`
                 - ✌️ **Peace / V:** `THANK YOU`
                 - 🤙 **Pinky Only (1 Finger) / 3 Fingers:** `HELP`
-                - 🤏/🖐️ **Pinch (🤏) / 4 Fingers:** `WAIT`
+                - 🖕/🖐️ **Middle Only (1 Finger) / 4 Fingers:** `WAIT`
                 - 👌 **OK Sign:** `PERFECT`
                 - 🤙/👆 **Phone / L-Shape (Thumb+Index):** `DOCTOR / CALL`
                 - 🤟 **ILY Sign:** `I LOVE YOU`

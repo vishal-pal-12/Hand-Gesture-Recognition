@@ -33,7 +33,7 @@ An end-to-end, production-ready **Assistive Sign-to-Speech Communication System*
 | 4 | **FINE / GOOD** 👍 | **Thumbs Up** (1 Finger, thumb up) | *"I am fine, everything is good"* | Clarity & Well-being |
 | 5 | **THANK YOU** ✌️ | **Peace / V Sign** (Index + Middle open) | *"Thank you very much"* | Gratitude & Politeness |
 | 6 | **HELP** 🤙 | **Pinky Finger Only** (1 Finger) OR 3 Fingers | *"Please help me, I need assistance"* | Emergency & Assistance |
-| 7 | **WAIT** 🤏/🖐️ | **Pinch** (1-min / 🤏) OR **Four Fingers** | *"Please wait a moment"* | Pause & Patience |
+| 7 | **WAIT** 🖕/🖐️ | **Middle Finger Only** (1 Finger) OR **Four Fingers** | *"Please wait a moment"* | Pause & Patience |
 | 8 | **PERFECT** 👌 | **OK Sign** (Thumb & Index circle, 3 open) | *"Everything is perfect and all good"* | Satisfaction & Approval |
 | 9 | **DOCTOR / CALL** 🤙/👆 | **Phone Sign** OR **L-Shape** (Thumb + Index) | *"I need a doctor or call someone"* | Medical & Urgent Call |
 | 10 | **I LOVE YOU** 🤟 | **ILY Sign** (Thumb, Index, Pinky open) | *"I love you, Goodbye"* | Affection & Parting |
@@ -58,7 +58,7 @@ An end-to-end, production-ready **Assistive Sign-to-Speech Communication System*
 | **FINE / GOOD (Thumbs Up)** | 100.00% | 100.00% | 100.00% | 39 |
 | **THANK YOU (Peace / V)** | 100.00% | 100.00% | 100.00% | 48 |
 | **HELP (Three Fingers)** | 100.00% | 100.00% | 100.00% | 40 |
-| **WAIT (Four Fingers)** | 100.00% | 100.00% | 100.00% | 43 |
+| **WAIT (Middle Finger)** | 100.00% | 100.00% | 100.00% | 43 |
 | **PERFECT (OK Sign)** | 100.00% | 100.00% | 100.00% | 33 |
 | **DOCTOR / CALL (Phone Sign)** | 100.00% | 100.00% | 100.00% | 29 |
 | **I LOVE YOU (ILY Sign)** | 100.00% | 100.00% | 100.00% | 47 |

@@ -29,7 +29,7 @@ GESTURE_LABELS = [
     'FINE / GOOD (Thumbs Up)',
     'THANK YOU (Peace / V)',
     'HELP (Pinky Finger)',
-    'WAIT (Pinch / 4 Fingers)',
+    'WAIT (Middle Finger)',
     'PERFECT (OK Sign)',
     'DOCTOR / CALL (Phone / L-Shape)',
     'I LOVE YOU (ILY Sign)'
@@ -176,17 +176,21 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
     # 4. Solo Pinky Finger -> HELP (Sign 5): Little Finger Only extended UP (1 finger)
     elif f['pinky'] and not f['index'] and not f['middle'] and not f['ring'] and not f['thumb_up'] and not f['thumb_down']:
         pred_idx = 5
-        confidence = 0.98
+        confidence = 0.99
 
-    # 5. Solo Index Finger -> HELLO (Sign 0): Index Finger Only (1 finger)
-    elif f['index'] and not f['middle'] and not f['ring'] and not f['pinky'] and not f['thumb_up'] and not f['thumb_down'] and not f['thumb_out']:
-        pred_idx = 0
-        confidence = 0.98
+    # 5. Solo Middle Finger -> WAIT (Sign 6): Middle Finger Only extended UP (1 finger)
+    elif f['middle'] and not f['index'] and not f['ring'] and not f['pinky'] and not f['thumb_up'] and not f['thumb_down']:
+        pred_idx = 6
+        confidence = 0.99
 
-    # 6. L-Shape (Thumb + Index) -> DOCTOR / CALL (Sign 8): Simple 2 fingers
-    elif f['index'] and (f['thumb_out'] or f['thumb_up']) and not f['middle'] and not f['ring'] and not f['pinky']:
-        pred_idx = 8
-        confidence = 0.97
+    # 6. Solo Index Finger -> HELLO (Sign 0): Index Finger Only extended UP (1 finger)
+    elif f['index'] and not f['middle'] and not f['ring'] and not f['pinky'] and not f['thumb_up'] and not f['thumb_down']:
+        if f['thumb_out']:
+            pred_idx = 8  # L-Shape (Thumb + Index) -> DOCTOR / CALL
+            confidence = 0.97
+        else:
+            pred_idx = 0  # Solo Index -> HELLO
+            confidence = 0.99
 
     # 7. Phone Sign (Thumb + Pinky) -> DOCTOR / CALL (Sign 8): Thumb + Pinky
     elif (f['thumb_out'] or f['thumb_up']) and f['pinky'] and not f['index'] and not f['middle'] and not f['ring']:
@@ -196,7 +200,7 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
     # 8. Peace / V Sign -> THANK YOU (Sign 4): Index + Middle open (2 fingers)
     elif f['index'] and f['middle'] and not f['ring'] and not f['pinky']:
         pred_idx = 4
-        confidence = 0.97
+        confidence = 0.98
 
     # 9. I Love You -> I LOVE YOU (Sign 9): Thumb + Index + Pinky open
     elif (f['thumb_out'] or f['thumb_up']) and f['index'] and f['pinky'] and not f['middle'] and not f['ring']:
@@ -234,10 +238,12 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
             pred_idx = 1
         elif f['thumb_up']:
             pred_idx = 3
-        elif f['pinky'] and not f['index'] and not f['middle']:
-            pred_idx = 5
+        elif f['main_count'] == 1 and f['middle']:
+            pred_idx = 6
         elif f['main_count'] == 1 and f['index']:
             pred_idx = 0
+        elif f['main_count'] == 1 and f['pinky']:
+            pred_idx = 5
         elif f['main_count'] == 2 and f['index'] and f['middle']:
             pred_idx = 4
         elif f['main_count'] == 3:

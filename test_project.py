@@ -70,6 +70,29 @@ class TestDeafVoiceMultiHandProject(unittest.TestCase):
             self.assertEqual(pred_l, idx, f"Left hand gesture {idx} ({GESTURE_LABELS[idx]}) misclassified as {pred_l}!")
             self.assertGreater(conf_l, 0.90)
 
+    def test_04b_solo_middle_and_index_fingers(self):
+        for h in ["Right", "Left"]:
+            fist = generate_canonical_landmarks(gesture_idx=1, handedness=h)
+            
+            # Solo Middle Finger -> WAIT (idx 6)
+            mid = fist.copy()
+            mid[10] = [0.50, 0.42, 0.0]
+            mid[11] = [0.50, 0.30, 0.0]
+            mid[12] = [0.50, 0.20, 0.0]
+            pred_m, label_m, phrase_m, conf_m, _ = classify_finger_gesture(mid, handedness=h)
+            self.assertEqual(pred_m, 6, f"{h} solo middle must be WAIT (6), got {pred_m}")
+            self.assertEqual(phrase_m, "Please wait a moment")
+
+            # Solo Index Finger -> HELLO (idx 0)
+            idx_x = 0.45 if h == "Right" else 0.55
+            idx_lm = fist.copy()
+            idx_lm[6] = [idx_x, 0.45, 0.0]
+            idx_lm[7] = [idx_x, 0.35, 0.0]
+            idx_lm[8] = [idx_x, 0.22, 0.0]
+            pred_i, label_i, phrase_i, conf_i, _ = classify_finger_gesture(idx_lm, handedness=h)
+            self.assertEqual(pred_i, 0, f"{h} solo index must be HELLO (0), got {pred_i}")
+            self.assertEqual(phrase_i, "Hello, Nice to meet you")
+
     def test_05_landmark_model_architecture(self):
         model = build_landmark_classifier(input_dim=63, num_classes=10)
         dummy_input = tf.zeros((2, 63))

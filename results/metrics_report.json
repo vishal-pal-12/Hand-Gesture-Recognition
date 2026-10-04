@@ -4,6 +4,6 @@
     "precision_macro_pct": 100.0,
     "recall_macro_pct": 100.0,
     "f1_score_macro_pct": 100.0,
-    "total_test_samples": 400,
-    "num_classes": 10
+    "total_test_samples": 360,
+    "num_classes": 9
 }

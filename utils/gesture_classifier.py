@@ -8,9 +8,9 @@
 
 import numpy as np
 
-# 10 Non-Overlapping Finger-Based Sign Language Classes
+# 9 Non-Overlapping Finger-Based Sign Language Classes
 CLASS_NAMES = [
-    'index_hello',
+    'hello',
     'fist_no',
     'palm_yes',
     'thumbs_fine',
@@ -18,12 +18,11 @@ CLASS_NAMES = [
     'three_help',
     'four_wait',
     'ok_perfect',
-    'call_doctor',
     'ily_love'
 ]
 
 GESTURE_LABELS = [
-    'HELLO (Index Finger)',
+    'HELLO (Phone / L-Shape)',
     'NO (Thumb Down / Fist)',
     'YES (Open Palm)',
     'FINE / GOOD (Thumbs Up)',
@@ -31,7 +30,6 @@ GESTURE_LABELS = [
     'HELP (Pinky Finger)',
     'WAIT (Middle Finger)',
     'PERFECT (OK Sign)',
-    'DOCTOR / CALL (Phone / L-Shape)',
     'I LOVE YOU (ILY Sign)'
 ]
 
@@ -44,7 +42,6 @@ DEAF_SPOKEN_PHRASES = [
     "Please help me, I need assistance",
     "Please wait a moment",
     "Everything is perfect and all good",
-    "I need a doctor or call someone",
     "I love you, Goodbye"
 ]
 
@@ -57,7 +54,6 @@ GESTURE_COLORS = [
     (200, 50, 220),   # Purple - Help
     (50, 170, 240),   # Amber/Orange - Wait
     (50, 240, 150),   # Mint - Perfect
-    (0, 100, 255),    # Coral - Doctor
     (255, 105, 180)   # Pink - I Love You
 ]
 
@@ -155,26 +151,27 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
     Supports single-finger shortcuts for NO (Thumb Down), HELP (Solo Pinky), 
     WAIT (Pinch/4-fing), and DOCTOR (L-shape/Phone).
     """
+    num_classes = len(CLASS_NAMES)
     f = get_finger_states(landmarks_21x3, handedness=handedness)
-    probs = np.zeros(10, dtype=np.float32)
+    probs = np.zeros(num_classes, dtype=np.float32)
 
     # 1. Thumbs Up -> FINE / GOOD (Sign 3): Solo Thumb UP (1 finger)
     if f['thumb_up'] and not f['index'] and not f['middle'] and not f['ring'] and not f['pinky']:
         pred_idx = 3
-        confidence = 0.98
+        confidence = 0.99
 
     # 2. Thumbs Down -> NO (Sign 1): Solo Thumb DOWN (1 finger)
     elif f['thumb_down'] and not f['index'] and not f['middle'] and not f['ring'] and not f['pinky']:
         pred_idx = 1
-        confidence = 0.98
+        confidence = 0.99
 
     # 3. Closed Fist -> NO (Sign 1): All fingers curled
     elif f['main_count'] == 0 and not f['thumb_up'] and not f['thumb_down']:
         pred_idx = 1
-        confidence = 0.96
+        confidence = 0.97
 
     # 4. Solo Pinky Finger -> HELP (Sign 5): Little Finger Only extended UP (1 finger)
-    elif f['pinky'] and not f['index'] and not f['middle'] and not f['ring'] and not f['thumb_up'] and not f['thumb_down']:
+    elif f['pinky'] and not f['index'] and not f['middle'] and not f['ring'] and not f['thumb_up'] and not f['thumb_down'] and not f['thumb_out']:
         pred_idx = 5
         confidence = 0.99
 
@@ -183,29 +180,25 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
         pred_idx = 6
         confidence = 0.99
 
-    # 6. Solo Index Finger -> HELLO (Sign 0): Index Finger Only extended UP (1 finger)
-    elif f['index'] and not f['middle'] and not f['ring'] and not f['pinky'] and not f['thumb_up'] and not f['thumb_down']:
-        if f['thumb_out']:
-            pred_idx = 8  # L-Shape (Thumb + Index) -> DOCTOR / CALL
-            confidence = 0.97
-        else:
-            pred_idx = 0  # Solo Index -> HELLO
-            confidence = 0.99
-
-    # 7. Phone Sign (Thumb + Pinky) -> DOCTOR / CALL (Sign 8): Thumb + Pinky
+    # 6. Phone Sign (Thumb + Pinky) -> HELLO (Sign 0): Doctor gesture is now HELLO
     elif (f['thumb_out'] or f['thumb_up']) and f['pinky'] and not f['index'] and not f['middle'] and not f['ring']:
-        pred_idx = 8
-        confidence = 0.97
+        pred_idx = 0
+        confidence = 0.98
+
+    # 7. L-Shape (Thumb + Index) -> HELLO (Sign 0): Doctor gesture is now HELLO
+    elif f['index'] and (f['thumb_out'] or f['thumb_up']) and not f['middle'] and not f['ring'] and not f['pinky']:
+        pred_idx = 0
+        confidence = 0.98
 
     # 8. Peace / V Sign -> THANK YOU (Sign 4): Index + Middle open (2 fingers)
     elif f['index'] and f['middle'] and not f['ring'] and not f['pinky']:
         pred_idx = 4
         confidence = 0.98
 
-    # 9. I Love You -> I LOVE YOU (Sign 9): Thumb + Index + Pinky open
+    # 9. I Love You -> I LOVE YOU (Sign 8): Thumb + Index + Pinky open
     elif (f['thumb_out'] or f['thumb_up']) and f['index'] and f['pinky'] and not f['middle'] and not f['ring']:
-        pred_idx = 9
-        confidence = 0.97
+        pred_idx = 8
+        confidence = 0.98
 
     # 10. OK Sign -> PERFECT (Sign 7): Thumb & Index circle, other 3 open
     elif f['ok_circle'] and f['middle'] and (f['ring'] or f['pinky']):
@@ -240,8 +233,6 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
             pred_idx = 3
         elif f['main_count'] == 1 and f['middle']:
             pred_idx = 6
-        elif f['main_count'] == 1 and f['index']:
-            pred_idx = 0
         elif f['main_count'] == 1 and f['pinky']:
             pred_idx = 5
         elif f['main_count'] == 2 and f['index'] and f['middle']:
@@ -259,22 +250,28 @@ def classify_finger_gesture(landmarks_21x3, handedness="Right", model=None):
         try:
             feats = normalize_landmarks(landmarks_21x3, handedness=handedness).reshape(1, -1)
             model_probs = model.predict(feats, verbose=0)[0]
-            geo_probs = np.zeros(10, dtype=np.float32)
-            geo_probs[pred_idx] = 1.0
-            # Higher weight on deterministic geometry (0.80) to eliminate ambiguity
-            probs = 0.80 * geo_probs + 0.20 * model_probs
-            probs /= np.sum(probs)
-            pred_idx = int(np.argmax(probs))
-            confidence = float(probs[pred_idx])
+            if len(model_probs) == num_classes:
+                geo_probs = np.zeros(num_classes, dtype=np.float32)
+                geo_probs[pred_idx] = 1.0
+                # Higher weight on deterministic geometry (0.80) to eliminate ambiguity
+                probs = 0.80 * geo_probs + 0.20 * model_probs
+                probs /= np.sum(probs)
+                pred_idx = int(np.argmax(probs))
+                confidence = float(probs[pred_idx])
+            else:
+                probs[pred_idx] = confidence
+                for i in range(num_classes):
+                    if i != pred_idx:
+                        probs[i] = (1.0 - confidence) / float(num_classes - 1)
         except Exception:
             probs[pred_idx] = confidence
-            for i in range(10):
+            for i in range(num_classes):
                 if i != pred_idx:
-                    probs[i] = (1.0 - confidence) / 9.0
+                    probs[i] = (1.0 - confidence) / float(num_classes - 1)
     else:
         probs[pred_idx] = confidence
-        for i in range(10):
+        for i in range(num_classes):
             if i != pred_idx:
-                probs[i] = (1.0 - confidence) / 9.0
+                probs[i] = (1.0 - confidence) / float(num_classes - 1)
 
     return pred_idx, GESTURE_LABELS[pred_idx], DEAF_SPOKEN_PHRASES[pred_idx], confidence, probs

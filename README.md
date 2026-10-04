@@ -23,11 +23,11 @@ An end-to-end, production-ready **Assistive Sign-to-Speech Communication System*
 
 ---
 
-## 📖 10 Non-Overlapping Finger Gestures
+## 📖 9 Non-Overlapping Finger Gestures
 
 | # | Gesture Name | Finger Formation | Spoken Voice Output | Purpose / Category |
 |:---:|:---|:---|:---|:---|
-| 1 | **HELLO** ☝️ | Only **Index Finger** extended UP (1 Finger) | *"Hello, Nice to meet you"* | Greeting & Attention |
+| 1 | **HELLO** 🤙/👆 | **Phone Sign** OR **L-Shape** (Thumb + Index) | *"Hello, Nice to meet you"* | Greeting & Attention |
 | 2 | **NO** 👎/✊ | **Thumb Down** (1 Finger) OR **Closed Fist** | *"No, Please stop"* | Disagreement & Stop |
 | 3 | **YES** ✋ | **Open Palm** (all 5 fingers open) | *"Yes, I agree and understand"* | Affirmation & Confirmation |
 | 4 | **FINE / GOOD** 👍 | **Thumbs Up** (1 Finger, thumb up) | *"I am fine, everything is good"* | Clarity & Well-being |
@@ -35,14 +35,13 @@ An end-to-end, production-ready **Assistive Sign-to-Speech Communication System*
 | 6 | **HELP** 🤙 | **Pinky Finger Only** (1 Finger) OR 3 Fingers | *"Please help me, I need assistance"* | Emergency & Assistance |
 | 7 | **WAIT** 🖕/🖐️ | **Middle Finger Only** (1 Finger) OR **Four Fingers** | *"Please wait a moment"* | Pause & Patience |
 | 8 | **PERFECT** 👌 | **OK Sign** (Thumb & Index circle, 3 open) | *"Everything is perfect and all good"* | Satisfaction & Approval |
-| 9 | **DOCTOR / CALL** 🤙/👆 | **Phone Sign** OR **L-Shape** (Thumb + Index) | *"I need a doctor or call someone"* | Medical & Urgent Call |
-| 10 | **I LOVE YOU** 🤟 | **ILY Sign** (Thumb, Index, Pinky open) | *"I love you, Goodbye"* | Affection & Parting |
+| 9 | **I LOVE YOU** 🤟 | **ILY Sign** (Thumb, Index, Pinky open) | *"I love you, Goodbye"* | Affection & Parting |
 
 ---
 
 ## 📊 Evaluation & Performance Metrics
 
-### Confusion Matrix (Test Split: 400 Samples)
+### Confusion Matrix (Test Split: 360 Samples)
 ![Confusion Matrix](results/confusion_matrix.png)
 
 ### Training & Validation Curves
@@ -52,17 +51,16 @@ An end-to-end, production-ready **Assistive Sign-to-Speech Communication System*
 
 | Gesture Class | Precision | Recall | F1-Score | Support |
 |:---|:---:|:---:|:---:|:---:|
-| **HELLO (Index Finger)** | 100.00% | 100.00% | 100.00% | 42 |
-| **NO (Closed Fist)** | 100.00% | 100.00% | 100.00% | 31 |
-| **YES (Open Palm)** | 100.00% | 100.00% | 100.00% | 48 |
-| **FINE / GOOD (Thumbs Up)** | 100.00% | 100.00% | 100.00% | 39 |
-| **THANK YOU (Peace / V)** | 100.00% | 100.00% | 100.00% | 48 |
-| **HELP (Three Fingers)** | 100.00% | 100.00% | 100.00% | 40 |
-| **WAIT (Middle Finger)** | 100.00% | 100.00% | 100.00% | 43 |
-| **PERFECT (OK Sign)** | 100.00% | 100.00% | 100.00% | 33 |
-| **DOCTOR / CALL (Phone Sign)** | 100.00% | 100.00% | 100.00% | 29 |
-| **I LOVE YOU (ILY Sign)** | 100.00% | 100.00% | 100.00% | 47 |
-| **Macro Average** | **100.00%** | **100.00%** | **100.00%** | **400** |
+| **HELLO (Phone / L-Shape)** | 100.00% | 100.00% | 100.00% | 33 |
+| **NO (Thumb Down / Fist)** | 100.00% | 100.00% | 100.00% | 40 |
+| **YES (Open Palm)** | 100.00% | 100.00% | 100.00% | 40 |
+| **FINE / GOOD (Thumbs Up)** | 100.00% | 100.00% | 100.00% | 35 |
+| **THANK YOU (Peace / V)** | 100.00% | 100.00% | 100.00% | 24 |
+| **HELP (Pinky Finger)** | 100.00% | 100.00% | 100.00% | 47 |
+| **WAIT (Middle Finger)** | 100.00% | 100.00% | 100.00% | 48 |
+| **PERFECT (OK Sign)** | 100.00% | 100.00% | 100.00% | 49 |
+| **I LOVE YOU (ILY Sign)** | 100.00% | 100.00% | 100.00% | 44 |
+| **Macro Average** | **100.00%** | **100.00%** | **100.00%** | **360** |
 
 ---
 

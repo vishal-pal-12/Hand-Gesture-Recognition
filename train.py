@@ -52,7 +52,7 @@ def evaluate_model(model, X_test, y_test, results_dir=RESULTS_DIR):
     print("\n--- PER-CLASS DEAF SIGN RECOGNITION REPORT ---")
     report = classification_report(
         y_test, y_pred,
-        target_names=[f"{GESTURE_LABELS[i]:<28}" for i in range(10)],
+        target_names=[f"{GESTURE_LABELS[i]:<28}" for i in range(len(CLASS_NAMES))],
         digits=4
     )
     print(report)
@@ -67,7 +67,7 @@ def evaluate_model(model, X_test, y_test, results_dir=RESULTS_DIR):
         'recall_macro_pct': round(float(rec) * 100, 2),
         'f1_score_macro_pct': round(float(f1) * 100, 2),
         'total_test_samples': int(len(y_test)),
-        'num_classes': 10
+        'num_classes': len(CLASS_NAMES)
     }
     metrics_path = os.path.join(results_dir, 'metrics_report.json')
     with open(metrics_path, 'w') as f:

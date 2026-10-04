@@ -96,7 +96,7 @@ def build_paper_cnn(input_shape=(100, 100, 3), num_classes=10, use_batch_norm=Tr
     return model
 
 
-def build_landmark_classifier(input_dim=63, num_classes=10):
+def build_landmark_classifier(input_dim=63, num_classes=9):
     """
     Constructs a high-speed Deep Dense Neural Network for 21 3D hand landmarks (63 features).
     Provides lightning-fast, ultra-accurate gesture inference (<1 ms) invariant to lighting,

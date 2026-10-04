@@ -43,9 +43,11 @@ def cmd_predict(args):
     elif args.dir:
         predict_directory(args.dir)
     else:
-        sample_path = 'sample_images/index_hello_sample.jpg'
+        sample_path = 'sample_images/hello_sample.jpg'
         if not os.path.exists(sample_path):
-            sample_path = 'sample_images/posture_a_sample.jpg'
+            sample_path = 'sample_images/call_doctor_sample.jpg'
+        if not os.path.exists(sample_path):
+            sample_path = 'sample_images/index_hello_sample.jpg'
         if os.path.exists(sample_path):
             print(f"[INFO] No image specified. Testing on default deaf sign sample: {sample_path}")
             predict_from_image(sample_path, show=False, speak=False)
@@ -70,15 +72,15 @@ def cmd_verify(args):
     print("  Supports Left & Right Hands, Multi-Hand, and Zero-Overlap AI")
     print("=" * 68)
 
-    print("\n[1/6] Verifying 10 Non-Overlapping Finger-Based Categories ...")
     from utils.gesture_classifier import CLASS_NAMES, GESTURE_LABELS, DEAF_SPOKEN_PHRASES
-    for i in range(10):
+    print(f"\n[1/6] Verifying {len(CLASS_NAMES)} Non-Overlapping Finger-Based Categories ...")
+    for i in range(len(CLASS_NAMES)):
         print(f"       Sign {i+1:<2}: {GESTURE_LABELS[i]:<28} -> \"{DEAF_SPOKEN_PHRASES[i]}\"")
-    print("  [OK] 10 Finger-Wise categories defined with zero mutual overlap.")
+    print(f"  [OK] {len(CLASS_NAMES)} Finger-Wise categories defined with zero mutual overlap.")
 
     print("\n[2/6] Verifying Multi-Hand Landmark Neural Network Architecture ...")
     from models.architecture import build_landmark_classifier
-    model = build_landmark_classifier(input_dim=63, num_classes=10)
+    model = build_landmark_classifier(input_dim=63, num_classes=len(CLASS_NAMES))
     print(f"  [OK] Landmark Neural Network compiled successfully with {model.count_params():,} parameters.")
 
     print("\n[3/6] Verifying trained DeafVoice model checkpoints ...")

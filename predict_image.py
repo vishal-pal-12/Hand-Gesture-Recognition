@@ -62,7 +62,7 @@ def draw_prediction_card(image_bgr, pred_idx, confidence, probabilities, handedn
     sorted_indices = np.argsort(probabilities)[::-1][:3]
     bar_start_x = int(w * 0.50)
     bar_max_w = int(w * 0.46)
-    short_names = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WAIT", "PERFECT", "DOCTOR", "LOVE"]
+    short_names = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WAIT", "PERFECT", "LOVE"]
 
     for i, idx in enumerate(sorted_indices):
         bar_y = 10 + i * 21
@@ -114,7 +114,7 @@ def predict_from_image(image_path, model=None, save_result=True, show=False, out
         pred_label = GESTURE_LABELS[pred_idx]
         spoken_phrase = DEAF_SPOKEN_PHRASES[pred_idx]
         confidence = 0.95
-        probabilities = np.zeros(10, dtype=np.float32)
+        probabilities = np.zeros(len(CLASS_NAMES), dtype=np.float32)
         probabilities[pred_idx] = 0.95
         handedness = "Right"
 

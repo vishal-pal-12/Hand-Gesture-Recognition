@@ -85,9 +85,10 @@ def generate_canonical_landmarks(gesture_idx, handedness="Right"):
         lm[3] = [0.28, 0.58, 0.0]
         lm[4] = [0.22, 0.55, 0.0]
 
-    # 10 Gestures
-    if gesture_idx == 0:  # HELLO (Index Finger)
-        extend_index()
+    # 9 Gestures
+    if gesture_idx == 0:  # HELLO (Phone Sign / L-Shape)
+        extend_thumb_out()
+        extend_pinky()
     elif gesture_idx == 1:  # NO (Closed Fist)
         pass  # Already curled
     elif gesture_idx == 2:  # YES (Open Palm)
@@ -124,10 +125,7 @@ def generate_canonical_landmarks(gesture_idx, handedness="Right"):
         extend_middle()
         extend_ring()
         extend_pinky()
-    elif gesture_idx == 8:  # DOCTOR / CALL (Phone Sign)
-        extend_thumb_out()
-        extend_pinky()
-    elif gesture_idx == 9:  # I LOVE YOU (ILY Sign)
+    elif gesture_idx == 8:  # I LOVE YOU (ILY Sign)
         extend_thumb_out()
         extend_index()
         extend_pinky()
@@ -207,8 +205,8 @@ def build_full_dataset(num_samples_per_class=200):
     X_list = []
     y_list = []
 
-    print("[DATASET] Generating 2,000 finger-wise multi-hand gesture samples ...")
-    for class_idx in range(10):
+    print(f"[DATASET] Generating {len(CLASS_NAMES) * num_samples_per_class} finger-wise multi-hand gesture samples ...")
+    for class_idx in range(len(CLASS_NAMES)):
         for i in range(num_samples_per_class):
             handedness = "Right" if i % 2 == 0 else "Left"
             base_lm = generate_canonical_landmarks(class_idx, handedness=handedness)

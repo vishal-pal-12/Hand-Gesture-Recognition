@@ -199,10 +199,10 @@ with st.sidebar:
 
     st.write("---")
     st.subheader("📖 Sign Reference Guide")
-    st.caption("10 Zero-Overlap Finger Gestures:")
+    st.caption("9 Zero-Overlap Finger Gestures:")
 
-    icons = ["☝️", "✊", "✋", "👍", "✌️", "🤟", "🖐️", "👌", "🤙", "🤟"]
-    for i in range(10):
+    icons = ["🤙", "✊", "✋", "👍", "✌️", "🤙", "🖕", "👌", "🤟"]
+    for i in range(len(CLASS_NAMES)):
         with st.expander(f"{icons[i]} {GESTURE_LABELS[i]}"):
             st.markdown(f"**Voice Phrase:** *\"{DEAF_SPOKEN_PHRASES[i]}\"*")
             st.markdown(f"**Class Name:** `{CLASS_NAMES[i]}`")
@@ -355,7 +355,7 @@ with tab_live:
                 """)
                 st.markdown("#### 🎯 Quick Gesture Reminders:")
                 st.markdown("""
-                - ☝️ **Index Only (1 Finger):** `HELLO`
+                - 🤙/👆 **Phone / L-Shape (Thumb+Pinky / Thumb+Index):** `HELLO`
                 - 👎/✊ **Thumb Down (1 Finger) / Fist:** `NO`
                 - ✋ **Open Palm:** `YES`
                 - 👍 **Thumbs Up (1 Finger):** `FINE / GOOD`
@@ -363,7 +363,6 @@ with tab_live:
                 - 🤙 **Pinky Only (1 Finger) / 3 Fingers:** `HELP`
                 - 🖕/🖐️ **Middle Only (1 Finger) / 4 Fingers:** `WAIT`
                 - 👌 **OK Sign:** `PERFECT`
-                - 🤙/👆 **Phone / L-Shape (Thumb+Index):** `DOCTOR / CALL`
                 - 🤟 **ILY Sign:** `I LOVE YOU`
                 """)
         else:
@@ -409,8 +408,8 @@ with tab_live:
                         st.markdown("#### Probability Distribution:")
                         probs = r['probabilities']
                         chart_data = {
-                            "Gesture": [GESTURE_LABELS[i].split('(')[0].strip() for i in range(10)],
-                            "Probability (%)": [float(probs[i] * 100) for i in range(10)]
+                            "Gesture": [GESTURE_LABELS[i].split('(')[0].strip() for i in range(len(CLASS_NAMES))],
+                            "Probability (%)": [float(probs[i] * 100) for i in range(len(CLASS_NAMES))]
                         }
                         st.bar_chart(chart_data, x="Gesture", y="Probability (%)", color="#38bdf8")
                 else:
@@ -477,23 +476,22 @@ with tab_gallery:
     st.markdown("Click any sample card below to instantly test and hear the spoken translation.")
 
     sample_cards = [
-        ("index_hello", "☝️ HELLO", "Index Finger Only", "sample_images/index_hello_sample.jpg"),
+        ("hello", "🤙 HELLO", "Phone / L-Shape", "sample_images/hello_sample.jpg"),
         ("fist_no", "✊ NO", "Closed Fist", "sample_images/fist_no_sample.jpg"),
         ("palm_yes", "✋ YES", "Open Palm", "sample_images/palm_yes_sample.jpg"),
         ("thumbs_fine", "👍 FINE / GOOD", "Thumbs Up", "sample_images/thumbs_fine_sample.jpg"),
         ("peace_thanks", "✌️ THANK YOU", "Peace / V Sign", "sample_images/peace_thanks_sample.jpg"),
-        ("three_help", "🤟 HELP", "Three Fingers", "sample_images/three_help_sample.jpg"),
-        ("four_wait", "🖐️ WAIT", "Four Fingers", "sample_images/four_wait_sample.jpg"),
+        ("three_help", "🤙 HELP", "Pinky / 3 Fingers", "sample_images/three_help_sample.jpg"),
+        ("four_wait", "🖕 WAIT", "Middle Finger / 4 Fingers", "sample_images/four_wait_sample.jpg"),
         ("ok_perfect", "👌 PERFECT", "OK Circle Sign", "sample_images/ok_perfect_sample.jpg"),
-        ("call_doctor", "🤙 DOCTOR / CALL", "Phone Sign", "sample_images/call_doctor_sample.jpg"),
         ("ily_love", "🤟 I LOVE YOU", "ILY Sign", "sample_images/ily_love_sample.jpg"),
     ]
 
-    cols = st.columns(5)
+    cols = st.columns(3)
     selected_sample = None
 
     for i, (key, title, subtitle, img_path) in enumerate(sample_cards):
-        col = cols[i % 5]
+        col = cols[i % 3]
         with col:
             if os.path.exists(img_path):
                 st.image(img_path, caption=title, use_container_width=True)

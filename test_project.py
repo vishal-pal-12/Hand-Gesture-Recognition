@@ -30,9 +30,9 @@ from utils.assistive_comm import SentenceBuilder, GestureStabilityTracker
 class TestDeafVoiceMultiHandProject(unittest.TestCase):
 
     def test_01_classes_and_phrases_count(self):
-        self.assertEqual(len(CLASS_NAMES), 10)
-        self.assertEqual(len(GESTURE_LABELS), 10)
-        self.assertEqual(len(DEAF_SPOKEN_PHRASES), 10)
+        self.assertEqual(len(CLASS_NAMES), 9)
+        self.assertEqual(len(GESTURE_LABELS), 9)
+        self.assertEqual(len(DEAF_SPOKEN_PHRASES), 9)
 
     def test_02_multi_hand_detector_configuration(self):
         detector = HandDetector(max_hands=2)
@@ -56,8 +56,8 @@ class TestDeafVoiceMultiHandProject(unittest.TestCase):
         diff = np.max(np.abs(feats_r - feats_l))
         self.assertLess(diff, 0.05, f"Left and Right hands must have symmetric feature representations! Diff: {diff}")
 
-    def test_04_zero_overlapping_classification_all_10(self):
-        for idx in range(10):
+    def test_04_zero_overlapping_classification_all_9(self):
+        for idx in range(9):
             # Test Right Hand
             lm_r = generate_canonical_landmarks(gesture_idx=idx, handedness="Right")
             pred_r, _, _, conf_r, _ = classify_finger_gesture(lm_r, handedness="Right")
@@ -70,7 +70,7 @@ class TestDeafVoiceMultiHandProject(unittest.TestCase):
             self.assertEqual(pred_l, idx, f"Left hand gesture {idx} ({GESTURE_LABELS[idx]}) misclassified as {pred_l}!")
             self.assertGreater(conf_l, 0.90)
 
-    def test_04b_solo_middle_and_index_fingers(self):
+    def test_04b_doctor_gesture_as_hello_and_wait(self):
         for h in ["Right", "Left"]:
             fist = generate_canonical_landmarks(gesture_idx=1, handedness=h)
             
@@ -83,21 +83,36 @@ class TestDeafVoiceMultiHandProject(unittest.TestCase):
             self.assertEqual(pred_m, 6, f"{h} solo middle must be WAIT (6), got {pred_m}")
             self.assertEqual(phrase_m, "Please wait a moment")
 
-            # Solo Index Finger -> HELLO (idx 0)
+            # Doctor Phone Sign (Thumb + Pinky) -> HELLO (idx 0)
+            phone = fist.copy()
+            # thumb out
+            t_x = 0.22 if h == "Right" else 0.78
+            phone[2] = [0.35 if h == "Right" else 0.65, 0.62, 0.0]
+            phone[3] = [0.28 if h == "Right" else 0.72, 0.58, 0.0]
+            phone[4] = [t_x, 0.55, 0.0]
+            # pinky extended
+            p_x = 0.60 if h == "Right" else 0.40
+            phone[18] = [p_x, 0.48, 0.0]
+            phone[19] = [p_x, 0.38, 0.0]
+            phone[20] = [p_x, 0.28, 0.0]
+            pred_p, label_p, phrase_p, conf_p, _ = classify_finger_gesture(phone, handedness=h)
+            self.assertEqual(pred_p, 0, f"{h} phone sign must be HELLO (0), got {pred_p}")
+            self.assertEqual(phrase_p, "Hello, Nice to meet you")
+
+            # Solo Index Finger -> NOT HELLO (Removed from Hello)
             idx_x = 0.45 if h == "Right" else 0.55
             idx_lm = fist.copy()
             idx_lm[6] = [idx_x, 0.45, 0.0]
             idx_lm[7] = [idx_x, 0.35, 0.0]
             idx_lm[8] = [idx_x, 0.22, 0.0]
             pred_i, label_i, phrase_i, conf_i, _ = classify_finger_gesture(idx_lm, handedness=h)
-            self.assertEqual(pred_i, 0, f"{h} solo index must be HELLO (0), got {pred_i}")
-            self.assertEqual(phrase_i, "Hello, Nice to meet you")
+            self.assertNotEqual(pred_i, 0, f"{h} solo index must NOT be HELLO (0)")
 
     def test_05_landmark_model_architecture(self):
-        model = build_landmark_classifier(input_dim=63, num_classes=10)
+        model = build_landmark_classifier(input_dim=63, num_classes=9)
         dummy_input = tf.zeros((2, 63))
         out = model(dummy_input)
-        self.assertEqual(out.shape, (2, 10))
+        self.assertEqual(out.shape, (2, 9))
 
     def test_06_assistive_communication_sentence_builder(self):
         sb = SentenceBuilder()

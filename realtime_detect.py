@@ -169,12 +169,12 @@ def draw_deaf_probability_bars(frame, probabilities):
     cv2.putText(frame, "Sign Probabilities:", (start_x + 8, start_y + 18),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.42, (0, 240, 255), 1, cv2.LINE_AA)
 
-    short_names = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WAIT", "PERFECT", "DOCTOR", "LOVE"]
+    short_names = ["HELLO", "NO", "YES", "FINE", "THANK U", "HELP", "WAIT", "PERFECT", "LOVE"]
     bar_max_w = 80
     bar_h = 13
     gap = 21
 
-    for i in range(10):
+    for i in range(len(short_names)):
         y_pos = start_y + 35 + i * gap
         prob = probabilities[i]
         label = f"{short_names[i]:<8}"

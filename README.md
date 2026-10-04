@@ -27,15 +27,15 @@ An end-to-end, production-ready **Assistive Sign-to-Speech Communication System*
 
 | # | Gesture Name | Finger Formation | Spoken Voice Output | Purpose / Category |
 |:---:|:---|:---|:---|:---|
-| 1 | **HELLO** ☝️ | Only **Index Finger** extended UP | *"Hello, Nice to meet you"* | Greeting & Attention |
-| 2 | **NO** ✊ | **Closed Fist** (all 5 curled) | *"No, Please stop"* | Disagreement & Stop |
+| 1 | **HELLO** ☝️ | Only **Index Finger** extended UP (1 Finger) | *"Hello, Nice to meet you"* | Greeting & Attention |
+| 2 | **NO** 👎/✊ | **Thumb Down** (1 Finger) OR **Closed Fist** | *"No, Please stop"* | Disagreement & Stop |
 | 3 | **YES** ✋ | **Open Palm** (all 5 fingers open) | *"Yes, I agree and understand"* | Affirmation & Confirmation |
-| 4 | **FINE / GOOD** 👍 | **Thumbs Up** (thumb up, 4 curled) | *"I am fine, everything is good"* | Clarity & Well-being |
+| 4 | **FINE / GOOD** 👍 | **Thumbs Up** (1 Finger, thumb up) | *"I am fine, everything is good"* | Clarity & Well-being |
 | 5 | **THANK YOU** ✌️ | **Peace / V Sign** (Index + Middle open) | *"Thank you very much"* | Gratitude & Politeness |
-| 6 | **HELP** 🤟 | **Three Fingers** (Index, Middle, Ring open) | *"Please help me, I need assistance"* | Emergency & Assistance |
-| 7 | **WAIT** 🖐️ | **Four Fingers** (Index, Middle, Ring, Pinky) | *"Please wait a moment"* | Pause & Patience |
+| 6 | **HELP** 🤙 | **Pinky Finger Only** (1 Finger) OR 3 Fingers | *"Please help me, I need assistance"* | Emergency & Assistance |
+| 7 | **WAIT** 🤏/🖐️ | **Pinch** (1-min / 🤏) OR **Four Fingers** | *"Please wait a moment"* | Pause & Patience |
 | 8 | **PERFECT** 👌 | **OK Sign** (Thumb & Index circle, 3 open) | *"Everything is perfect and all good"* | Satisfaction & Approval |
-| 9 | **DOCTOR / CALL** 🤙 | **Phone Sign** (Thumb & Pinky open) | *"I need a doctor or call someone"* | Medical & Urgent Call |
+| 9 | **DOCTOR / CALL** 🤙/👆 | **Phone Sign** OR **L-Shape** (Thumb + Index) | *"I need a doctor or call someone"* | Medical & Urgent Call |
 | 10 | **I LOVE YOU** 🤟 | **ILY Sign** (Thumb, Index, Pinky open) | *"I love you, Goodbye"* | Affection & Parting |
 
 ---

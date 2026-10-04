@@ -355,15 +355,15 @@ with tab_live:
                 """)
                 st.markdown("#### 🎯 Quick Gesture Reminders:")
                 st.markdown("""
-                - ☝️ **Index Only:** `HELLO`
-                - 🖐️ **Four Fingers:** `WAIT`
+                - ☝️ **Index Only (1 Finger):** `HELLO`
+                - 👎/✊ **Thumb Down (1 Finger) / Fist:** `NO`
                 - ✋ **Open Palm:** `YES`
-                - ✊ **Closed Fist:** `NO`
-                - 👍 **Thumbs Up:** `FINE / GOOD`
+                - 👍 **Thumbs Up (1 Finger):** `FINE / GOOD`
                 - ✌️ **Peace / V:** `THANK YOU`
-                - 🤟 **Three Fingers:** `HELP`
+                - 🤙 **Pinky Only (1 Finger) / 3 Fingers:** `HELP`
+                - 🤏/🖐️ **Pinch (🤏) / 4 Fingers:** `WAIT`
                 - 👌 **OK Sign:** `PERFECT`
-                - 🤙 **Phone Sign:** `DOCTOR / CALL`
+                - 🤙/👆 **Phone / L-Shape (Thumb+Index):** `DOCTOR / CALL`
                 - 🤟 **ILY Sign:** `I LOVE YOU`
                 """)
         else:
